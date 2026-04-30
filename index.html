@@ -606,7 +606,21 @@
         <section class="section" id="section5">
           <div class="kicker">Section 5</div>
           <h2>Job market research</h2>
-          <p class="lede">Research two possible job examples connected to your path. In most cases, one job posting or one main source per job is enough.</p>
+          <p class="lede">Research two possible job examples connected to your path. Start with a broad BLS snapshot, then compare specific job postings or job sources.</p>
+
+          <div class="job-card">
+            <div class="kicker">BLS Snapshot</div>
+            <h3>Start with the broad career overview.</h3>
+            <p class="lede" style="font-size:1rem; margin-bottom:18px;">Use the Bureau of Labor Statistics Occupational Outlook Handbook to get a general baseline before you look at individual job postings.</p>
+            <div class="field-grid">
+              <div class="field"><label for="blsTitle">BLS occupation title</label><input type="text" id="blsTitle" data-save placeholder="Example: Registered Nurses or Electricians" /></div>
+              <div class="field"><label for="blsSource">BLS page link</label><input type="url" id="blsSource" placeholder="Paste BLS Occupational Outlook Handbook link here" data-save /></div>
+              <div class="field"><label for="blsPay">Median pay</label><input type="text" id="blsPay" data-save placeholder="Example: $86,070 per year" /></div>
+              <div class="field"><label for="blsOutlook">Job outlook</label><input type="text" id="blsOutlook" data-save placeholder="Example: 6% growth, faster than average" /></div>
+              <div class="field"><label for="blsEducation">Typical entry-level education</label><input type="text" id="blsEducation" data-save /></div>
+              <div class="field"><label for="blsTraining">Work experience or on-the-job training listed by BLS</label><input type="text" id="blsTraining" data-save /></div>
+            </div>
+          </div>
 
           <div class="job-card">
             <div class="kicker">Job option 1</div>
@@ -637,6 +651,16 @@
               <div class="field"><label for="job2Availability">Job availability or outlook</label><input type="text" id="job2Availability" data-save /></div>
               <div class="field"><label for="job2Materials">Application materials needed</label><textarea id="job2Materials" data-save></textarea></div>
               <div class="field" style="grid-column:1/-1;"><label for="job2Employers">Common hiring companies, employers, agencies, unions, or branches</label><textarea id="job2Employers" data-save></textarea></div>
+            </div>
+          </div>
+
+          <div class="reflection-card" style="margin-top:22px;">
+            <div class="kicker">BLS comparison</div>
+            <h3>Compare the broad overview to the real postings.</h3>
+            <p class="lede" style="font-size:1rem; margin-bottom:18px;">Answer these after you look at the job examples above.</p>
+            <div class="field-grid">
+              <div class="field"><label for="blsMatch">One thing from BLS that matches the job postings you found</label><textarea id="blsMatch" data-save></textarea></div>
+              <div class="field"><label for="blsDifferent">One thing from BLS that seems different from the job postings you found</label><textarea id="blsDifferent" data-save></textarea></div>
             </div>
           </div>
         </section>
@@ -773,6 +797,16 @@
       lines.push(`No credential source 2: ${val('noCredentialSource2')}`);
       lines.push('');
       lines.push('Section 5: Job Market Research');
+      lines.push('BLS Snapshot');
+      lines.push(`BLS occupation title: ${val('blsTitle')}`);
+      lines.push(`BLS page link: ${val('blsSource')}`);
+      lines.push(`Median pay: ${val('blsPay')}`);
+      lines.push(`Job outlook: ${val('blsOutlook')}`);
+      lines.push(`Typical entry-level education: ${val('blsEducation')}`);
+      lines.push(`Work experience or on-the-job training listed by BLS: ${val('blsTraining')}`);
+      lines.push(`What matches the job postings: ${val('blsMatch')}`);
+      lines.push(`What seems different from the job postings: ${val('blsDifferent')}`);
+      lines.push('');
       [1, 2].forEach(n => {
         lines.push(`Job Option ${n}`);
         lines.push(`Main source: ${val(`job${n}MainSource`)}`);
