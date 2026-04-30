@@ -3,415 +3,526 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Career Path Timeline Worksheet, Week 2</title>
+  <title>Career Path Research, Week 2</title>
   <style>
-    :root{
-      --bg1:#f6f1e8;
-      --bg2:#fbf8f3;
-      --bg3:#ffffff;
-      --ink:#1f2937;
-      --muted:#6b7280;
-      --soft:#7b6650;
-      --line:#e8dfd1;
-      --card:#ffffff;
-      --accent:#b7791f;
-      --accent-soft:#fff6e8;
-      --green:#2f6f4f;
-      --red:#9b2c2c;
-      --shadow:0 10px 30px rgba(72, 55, 35, 0.08);
-      --radius:24px;
-      --focus:3px solid #b7791f;
-      --font: Arial, Helvetica, sans-serif;
+    :root {
+      --cream: #f7efe3;
+      --paper: #fffaf2;
+      --paper-2: #fff5e8;
+      --ink: #18212b;
+      --muted: #68727d;
+      --clay: #b45f3c;
+      --clay-dark: #793c29;
+      --sage: #6f7f62;
+      --plum: #463246;
+      --gold: #d6a95d;
+      --good: #286145;
+      --bad: #9a3412;
+      --bad-soft: #fff0eb;
+      --line: rgba(24, 33, 43, 0.14);
+      --soft: rgba(180, 95, 60, 0.12);
+      --shadow: 0 24px 70px rgba(40, 25, 15, 0.16);
+      --radius: 30px;
+      --field: #fffdf8;
     }
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-
-    body{
-      margin:0;
-      font-family:var(--font);
-      color:var(--ink);
-      background:linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 45%, var(--bg3) 100%);
-      line-height:1.5;
+    body.dark {
+      --cream: #14171a;
+      --paper: #20252b;
+      --paper-2: #252a31;
+      --ink: #f4f6f8;
+      --muted: #bdc7d3;
+      --clay: #d98763;
+      --clay-dark: #f0b28f;
+      --sage: #a9b998;
+      --plum: #2a2430;
+      --gold: #e8bf77;
+      --good: #98d5b3;
+      --bad: #ffb49e;
+      --bad-soft: #452820;
+      --line: rgba(244, 246, 248, 0.14);
+      --soft: rgba(217, 135, 99, 0.14);
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.36);
+      --field: #191d22;
     }
 
-    .page{
-      max-width:1100px;
-      margin:0 auto;
-      padding:32px 18px 80px;
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 10%, rgba(214, 169, 93, 0.35), transparent 24rem),
+        radial-gradient(circle at 92% 4%, rgba(70, 50, 70, 0.22), transparent 22rem),
+        linear-gradient(180deg, var(--cream), #f3e2d0 48%, #efe8dc);
+      font-size: 18px;
+      line-height: 1.55;
     }
 
-    .hero,
-    .card,
-    .print-card{
-      background:rgba(255,255,255,0.92);
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
+    body.dark {
+      background:
+        radial-gradient(circle at 8% 10%, rgba(214, 169, 93, 0.16), transparent 24rem),
+        radial-gradient(circle at 92% 4%, rgba(180, 95, 60, 0.20), transparent 22rem),
+        linear-gradient(180deg, #14171a, #1d2126 48%, #15181c);
     }
 
-    .hero{
-      padding:34px 28px;
-      margin-bottom:22px;
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 18px 80px;
     }
 
-    .eyebrow{
-      margin:0 0 8px 0;
-      font-size:13px;
-      color:var(--soft);
-      letter-spacing:.02em;
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 22px;
+      color: color-mix(in srgb, var(--ink) 72%, transparent);
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
     }
 
-    h1{
-      margin:0 0 10px 0;
-      font-size:clamp(2rem, 4vw, 2.8rem);
-      line-height:1.1;
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: color-mix(in srgb, var(--paper) 70%, transparent);
+      backdrop-filter: blur(8px);
     }
 
-    .hero p{
-      margin:0;
-      font-size:1.06rem;
-      max-width:900px;
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+      gap: 22px;
+      margin-bottom: 26px;
     }
 
-    .top-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin:18px 0 28px;
+    .hero-main,
+    .hero-card,
+    .section,
+    .tool-strip,
+    .mini-card,
+    .job-card,
+    .reflection-card,
+    .credential-card,
+    .final-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in srgb, var(--paper) 88%, transparent);
+      box-shadow: var(--shadow);
     }
 
-    button{
-      appearance:none;
-      border:none;
-      background:#fff;
-      color:var(--ink);
-      border:1px solid var(--line);
-      border-radius:999px;
-      padding:12px 18px;
-      font-size:0.98rem;
-      cursor:pointer;
-      box-shadow:0 4px 14px rgba(0,0,0,0.04);
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
+    .hero-main {
+      padding: clamp(34px, 6vw, 70px);
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      position: relative;
     }
 
-    button.primary{
-      background:linear-gradient(180deg, #c98e34 0%, #b7791f 100%);
-      color:#fff;
-      border-color:#aa741e;
+    .hero-main::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      bottom: -100px;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--clay) 13%, transparent);
+      border: 1px solid color-mix(in srgb, var(--clay) 22%, transparent);
     }
 
-    button:hover{transform:translateY(-1px)}
+    .hero-card {
+      padding: 26px;
+      background: linear-gradient(155deg, var(--plum), color-mix(in srgb, var(--clay-dark) 92%, black 8%));
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 26px;
+    }
+
+    .hero-card .kicker { color: rgba(255,255,255,0.75); }
+    .hero-card p { color: rgba(255,255,255,0.82); }
+
+    .big-number {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 5.8rem;
+      line-height: 0.9;
+      color: var(--gold);
+    }
+
+    .kicker {
+      color: var(--clay-dark);
+      font-size: 0.8rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      margin-bottom: 12px;
+    }
+
+    h1, h2, h3, h4, p { margin-top: 0; }
+
+    h1 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(3rem, 8vw, 6.7rem);
+      line-height: 0.9;
+      letter-spacing: -0.075em;
+      max-width: 780px;
+      margin-bottom: 22px;
+    }
+
+    h2 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(2rem, 4vw, 4.3rem);
+      line-height: 0.94;
+      letter-spacing: -0.055em;
+      margin-bottom: 16px;
+    }
+
+    h3 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 1.65rem;
+      line-height: 1;
+      letter-spacing: -0.025em;
+      margin-bottom: 10px;
+    }
+
+    h4 { margin-bottom: 8px; }
+    p { margin-bottom: 14px; }
+
+    .lede {
+      font-size: clamp(1.08rem, 2vw, 1.32rem);
+      color: var(--muted);
+      max-width: 680px;
+    }
+
+    .tool-strip {
+      display: grid;
+      grid-template-columns: minmax(180px, 1fr) auto auto auto;
+      gap: 10px;
+      align-items: center;
+      margin: 0 0 26px;
+      padding: 9px 10px;
+      border-radius: 24px;
+      background: color-mix(in srgb, var(--paper) 74%, transparent);
+      position: sticky;
+      top: 12px;
+      z-index: 5;
+      backdrop-filter: blur(10px);
+    }
+
+    .save-status {
+      color: var(--good);
+      font-size: 0.95rem;
+      padding-left: 8px;
+      min-height: 1.2em;
+    }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 11px 16px;
+      font-weight: 850;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.15s ease, box-shadow 0.15s ease;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button:hover { transform: translateY(-1px); }
+    .primary { background: var(--ink); color: var(--paper); }
+    .secondary { background: var(--soft); color: var(--clay-dark); border: 1px solid color-mix(in srgb, var(--clay) 24%, transparent); }
+    .danger { background: var(--bad-soft); color: var(--bad); border: 1px solid color-mix(in srgb, var(--bad) 30%, transparent); }
 
     button:focus-visible,
     input:focus-visible,
     textarea:focus-visible,
-    select:focus-visible{
-      outline:var(--focus);
-      outline-offset:2px;
+    select:focus-visible,
+    .choice-card:focus-visible {
+      outline: 3px solid color-mix(in srgb, var(--gold) 85%, white 15%);
+      outline-offset: 3px;
     }
 
-    .status-bar{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin:0 0 22px 0;
+    .workspace {
+      display: grid;
+      grid-template-columns: 240px minmax(0, 1fr);
+      gap: 22px;
+      align-items: start;
     }
 
-    .chip{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:999px;
-      padding:10px 14px;
-      font-size:0.94rem;
-      color:var(--ink);
+    .workspace main {
+      display: grid;
+      gap: 38px;
     }
 
-    .chip strong{font-weight:700}
-
-    .section{margin-bottom:22px}
-
-    .section > .card{padding:26px 22px}
-
-    .section-header{margin-bottom:18px}
-
-    .section-number{
-      display:inline-block;
-      margin:0 0 8px 0;
-      background:var(--accent-soft);
-      color:#8a5a12;
-      border:1px solid #edd6b0;
-      border-radius:999px;
-      padding:6px 12px;
-      font-size:0.88rem;
-      font-weight:700;
+    .side-nav {
+      position: sticky;
+      top: 102px;
+      display: grid;
+      gap: 10px;
     }
 
-    h2{
-      margin:0 0 8px 0;
-      font-size:1.6rem;
-      line-height:1.2;
+    .side-nav a {
+      display: block;
+      text-decoration: none;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 13px 14px;
+      background: color-mix(in srgb, var(--paper) 82%, transparent);
+      font-weight: 900;
     }
 
-    h3{
-      margin:0 0 12px 0;
-      font-size:1.2rem;
+    .side-nav a span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-weight: 400;
+      font-size: 0.9rem;
     }
 
-    .subtext{
-      margin:0;
-      color:var(--muted);
-      font-size:1rem;
+    .section {
+      padding: clamp(24px, 4vw, 34px);
+      position: relative;
     }
 
-    .mini-note{
-      margin:14px 0 0 0;
-      padding:14px 16px;
-      border-radius:16px;
-      background:#faf7f2;
-      border:1px solid var(--line);
-      color:#4b5563;
-      font-size:0.97rem;
+    .workspace .section + .section::before,
+    .workspace .section + .final-card::before {
+      content: "";
+      position: absolute;
+      top: -20px;
+      left: 6%;
+      right: 6%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--clay) 30%, transparent), transparent);
     }
 
-    .stack{
-      display:grid;
-      gap:16px;
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
     }
 
-    .grid-2{
-      display:grid;
-      grid-template-columns:repeat(2, minmax(0, 1fr));
-      gap:16px;
+    .field-grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .field-grid.one { grid-template-columns: 1fr; }
+
+    .field { display: grid; gap: 7px; }
+
+    label,
+    .group-label {
+      font-weight: 850;
+      font-size: 0.97rem;
     }
 
-    .grid-3{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(0, 1fr));
-      gap:16px;
+    .hint {
+      color: var(--muted);
+      font-size: 0.9rem;
     }
 
-    .field{
-      display:flex;
-      flex-direction:column;
-      gap:7px;
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 13px 14px;
+      background: var(--field);
+      color: var(--ink);
+      font: inherit;
     }
 
-    .field label,
-    .group-label{
-      font-size:0.98rem;
-      font-weight:700;
-      color:#243041;
+    textarea { min-height: 112px; resize: vertical; }
+
+    .mini-card {
+      padding: 18px;
+      box-shadow: 0 12px 32px rgba(40, 25, 15, 0.06);
+      background: color-mix(in srgb, var(--paper) 84%, var(--gold) 16%);
     }
 
-    .field .hint{
-      margin-top:-2px;
-      color:var(--muted);
-      font-size:0.9rem;
+    .choice-list {
+      display: grid;
+      gap: 14px;
     }
 
-    input[type="text"],
-    input[type="url"],
-    select,
-    textarea{
-      width:100%;
-      border:1px solid #d9d2c7;
-      border-radius:14px;
-      padding:12px 13px;
-      font:inherit;
-      background:#fff;
-      color:var(--ink);
+    .choice-card {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 18px;
+      background: var(--paper);
+      cursor: pointer;
+      display: grid;
+      gap: 8px;
     }
 
-    textarea{
-      min-height:120px;
-      resize:vertical;
+    .choice-card input { width: auto; margin-right: 8px; }
+    .choice-card p { color: var(--muted); margin: 0 0 0 27px; font-size: 0.96rem; }
+
+    .conditional {
+      display: none;
+      margin-top: 18px;
     }
 
-    .mini-source{
-      margin-top:8px;
-      padding:12px;
-      border:1px dashed #d8c6a6;
-      border-radius:14px;
-      background:#fffbf4;
-    }
+    .conditional.show { display: block; }
 
-    .mini-source-title{
-      font-size:0.9rem;
-      font-weight:700;
-      color:#7c5d2a;
-      margin-bottom:8px;
-    }
-
-    .option-boxes{
-      display:grid;
-      gap:12px;
-      margin-top:4px;
-    }
-
-    .option-box{
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:14px 14px 12px;
-      background:#fff;
-    }
-
-    .option-box input[type="radio"]{
-      transform:translateY(1px);
-      margin-right:8px;
-    }
-
-    .option-title{font-weight:700}
-
-    .option-desc{
-      margin:8px 0 0 25px;
-      color:var(--muted);
-      font-size:0.95rem;
-    }
-
-    .conditional{
-      display:none;
-      margin-top:16px;
-      padding:18px;
-      border-radius:20px;
-      border:1px solid var(--line);
-      background:#fcfbf9;
-    }
-
-    .conditional.show{display:block}
-
+    .credential-card,
     .job-card,
-    .application-card,
-    .reflection-card{
-      border:1px solid var(--line);
-      border-radius:20px;
-      padding:18px;
-      background:#fcfbf9;
+    .reflection-card {
+      padding: 22px;
+      background: var(--paper);
+      box-shadow: 0 16px 44px rgba(40, 25, 15, 0.08);
     }
 
-    .print-only{display:none}
-    .screen-only{display:block}
-    .saved-note{color:var(--green)}
-    .warning-note{color:var(--red)}
+    .job-card + .job-card { margin-top: 20px; }
 
-    @media (max-width: 860px){
-      .grid-2,
-      .grid-3{
-        grid-template-columns:1fr;
-      }
-
-      .hero,
-      .section > .card{
-        padding:22px 16px;
-      }
+    .source-strip {
+      margin-top: 10px;
+      padding: 12px;
+      border: 1px solid color-mix(in srgb, var(--gold) 35%, var(--line) 65%);
+      border-radius: 16px;
+      background: color-mix(in srgb, var(--paper) 78%, var(--gold) 22%);
     }
 
-    @media print{
-      body{
-        background:#fff;
-        color:#000;
-      }
+    .source-strip .source-title {
+      font-size: 0.84rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--clay-dark);
+      margin-bottom: 8px;
+    }
 
-      .page{
-        max-width:none;
-        padding:0;
-        margin:0;
-      }
+    .barrier {
+      display: none;
+      margin-top: 16px;
+      border-radius: 20px;
+      padding: 15px 17px;
+      color: var(--bad);
+      background: var(--bad-soft);
+      border: 1px solid color-mix(in srgb, var(--bad) 36%, transparent);
+      font-weight: 800;
+    }
 
-      .screen-only,
+    .barrier.show { display: block; }
+
+    .final-card {
+      padding: clamp(24px, 4vw, 36px);
+      background: linear-gradient(135deg, color-mix(in srgb, var(--paper) 92%, transparent), color-mix(in srgb, var(--paper-2) 92%, transparent));
+      position: relative;
+    }
+
+    .summary-output {
+      min-height: 320px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--field);
+      padding: 20px;
+      white-space: pre-wrap;
+      color: var(--ink);
+      font-size: 0.98rem;
+    }
+
+    .final-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .print-only { display: none; }
+
+    @media (max-width: 980px) {
       .hero,
-      .top-actions,
-      .status-bar,
-      .mini-note,
-      .subtext,
-      .hint{
-        display:none !important;
+      .workspace,
+      .final-grid { grid-template-columns: 1fr; }
+      .side-nav { position: static; }
+      .tool-strip { grid-template-columns: 1fr; border-radius: 26px; }
+      .field-grid,
+      .field-grid.three { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto !important; transition: none !important; }
+    }
+
+    @media print {
+      body, body.dark { background: white !important; color: black !important; font-size: 12pt; }
+      .screen-only, .tool-strip, .side-nav, .hero, .barrier { display: none !important; }
+      .page { max-width: none; padding: 0; }
+      .workspace { display: block; }
+      .section, .final-card, .credential-card, .job-card, .reflection-card, .mini-card, .summary-output {
+        box-shadow: none !important;
+        background: white !important;
+        border: 1px solid #bbb !important;
+        color: black !important;
+        page-break-inside: avoid;
       }
-
-      .print-only{display:block !important}
-
-      .section{
-        margin:0 0 14px 0;
-        break-inside:avoid;
-      }
-
-      .section > .card,
-      .print-card{
-        box-shadow:none;
-        border:1px solid #bbb;
-        background:#fff;
-        border-radius:10px;
-        padding:14px;
-      }
-
-      h2{
-        font-size:1.2rem;
-        margin-bottom:8px;
-      }
-
-      h3{font-size:1rem}
-
-      .print-grid{
-        display:grid;
-        grid-template-columns:1fr 1fr;
-        gap:10px;
-      }
-
-      .print-item{
-        border:1px solid #d5d5d5;
-        border-radius:8px;
-        padding:8px;
-      }
-
-      .print-item strong{
-        display:block;
-        margin-bottom:4px;
-      }
-
-      .print-full{grid-column:1 / -1}
+      .section { margin-bottom: 12px; }
+      .print-only { display: block !important; }
     }
   </style>
 </head>
 <body>
   <div class="page">
-    <header class="hero screen-only">
-      <p class="eyebrow">Career Path Timeline Worksheet • Week 2</p>
-      <h1>Sections 4–6: Career Entry Research</h1>
-      <p>
-        Use this page to research the next part of your path: credentials, job market details, and the application process.
-        Save your work as you go. When you are done, use the print button and save your work as a PDF to submit.
-      </p>
-    </header>
-
-    <div class="top-actions screen-only">
-      <button class="primary" type="button" onclick="window.print()">Print / Save as PDF</button>
-      <button type="button" id="clearBtn">Clear This Page</button>
+    <div class="topbar screen-only">
+      <div class="pill">ENG 101 · Research Essay</div>
+      <div class="pill">Week 2 Planning Studio</div>
     </div>
 
-    <div class="status-bar screen-only" aria-live="polite">
-      <div class="chip"><strong>Auto-save:</strong> <span id="saveStatus">Working</span></div>
-      <div class="chip"><strong>Week 2 focus:</strong> credentials, jobs, applications</div>
-      <div class="chip"><strong>Reminder:</strong> use real career, employer, and credential sources</div>
-    </div>
-
-    <section class="section">
-      <div class="card">
-        <div class="section-header">
-          <div class="section-number">Section 4</div>
-          <h2>Credential Check</h2>
-          <p class="subtext">
-            Before deciding a career does not require certification or licensing, you need to check first.
-          </p>
-          <div class="mini-note screen-only">
-            Start with CareerOneStop’s Certification Finder. Some paths may not require a license right away, but you still need to verify that through research.
-          </div>
+    <section class="hero screen-only">
+      <div class="hero-main">
+        <div>
+          <div class="kicker">Career Path Research</div>
+          <h1>From education to entry plan.</h1>
+          <p class="lede">Research what comes next: credentials, job examples, and the application process for your career path.</p>
         </div>
+      </div>
 
-        <div class="stack">
-          <div class="grid-2">
+      <aside class="hero-card">
+        <div>
+          <div class="kicker">This week</div>
+          <div class="big-number">02</div>
+          <h2 style="font-size:2.6rem; color:white;">Verify and apply.</h2>
+          <p>Check whether the path requires certification, licensing, training, or other credentials before moving into job market research.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="tool-strip screen-only" aria-label="Page tools">
+      <div class="save-status" id="saveStatus">Ready. Your work saves in this browser.</div>
+      <button class="secondary" type="button" id="themeToggle">Dark mode</button>
+      <button class="secondary" type="button" id="clearBtn">Clear This Page</button>
+      <button class="primary" type="button" id="printBtn">Print / Save as PDF</button>
+    </section>
+
+    <div class="workspace">
+      <nav class="side-nav screen-only" aria-label="Worksheet sections">
+        <a href="#section4">4. Credential check <span>Certifications, licenses, training</span></a>
+        <a href="#section5">5. Job market <span>Compare two job examples</span></a>
+        <a href="#section6">6. Application process <span>Next steps and materials</span></a>
+        <a href="#summarySection">Final notes <span>Review and print</span></a>
+      </nav>
+
+      <main>
+        <section class="section" id="section4">
+          <div class="kicker">Section 4</div>
+          <h2>Credential check</h2>
+          <p class="lede">Before deciding a career does not require certification or licensing, check first and record what you found.</p>
+
+          <div class="mini-card screen-only">
+            <strong>Start here:</strong> use CareerOneStop’s Certification Finder or another real credential/licensing source connected to this path.
+          </div>
+
+          <div class="field-grid" style="margin-top:18px;">
             <div class="field">
               <label for="certSearchChecked">Did you search CareerOneStop’s Certification Finder for this path?</label>
               <select id="certSearchChecked" data-save>
@@ -420,631 +531,313 @@
                 <option value="notyet">Not yet</option>
               </select>
             </div>
-
             <div class="field">
               <label for="credentialType">What kind of credential are you checking for?</label>
               <select id="credentialType" data-save>
                 <option value="">Select one</option>
-                <option value="certification">Certification</option>
-                <option value="license">License</option>
-                <option value="apprenticeship">Apprenticeship or journey-level requirement</option>
-                <option value="military">Military qualification or training requirement</option>
-                <option value="unsure">I am not sure yet</option>
+                <option>Certification</option>
+                <option>License</option>
+                <option>Apprenticeship or journey-level requirement</option>
+                <option>Military qualification or training requirement</option>
+                <option>I am not sure yet</option>
               </select>
             </div>
-          </div>
-
-          <div class="grid-2">
             <div class="field">
               <label for="certSearchTerm">What career, job title, or keyword did you search?</label>
               <input type="text" id="certSearchTerm" data-save />
             </div>
-
             <div class="field">
               <label for="certSearchFound">What did you find in that search?</label>
               <input type="text" id="certSearchFound" data-save />
             </div>
           </div>
 
-          <div class="field screen-only">
-            <span class="group-label">Choose the result that best matches what you found</span>
-            <div class="option-boxes">
-              <div class="option-box">
-                <label for="pathFound">
-                  <input type="radio" name="certPath" id="pathFound" value="found" data-save />
-                  <span class="option-title">I found a required or recommended credential to research</span>
-                </label>
-                <p class="option-desc">Use this if you found a certification, license, apprenticeship step, or other clear requirement.</p>
-              </div>
+          <div class="barrier screen-only" id="searchBarrier">Search CareerOneStop first and briefly record what you found before choosing one of these paths.</div>
 
-              <div class="option-box">
-                <label for="pathNotFound">
-                  <input type="radio" name="certPath" id="pathNotFound" value="notfound" data-save />
-                  <span class="option-title">I searched and did not find a clearly required credential right now</span>
-                </label>
-                <p class="option-desc">Use this only after you have actually checked and can explain what you found.</p>
-              </div>
-            </div>
+          <div class="choice-list screen-only" style="margin-top:18px;">
+            <label class="choice-card" for="pathFound">
+              <span><input type="radio" name="certPath" id="pathFound" value="found" data-save /> <strong>I found a required or recommended credential to research</strong></span>
+              <p>Use this if you found a certification, license, apprenticeship step, qualification, or other clear requirement.</p>
+            </label>
+            <label class="choice-card" for="pathNotFound">
+              <span><input type="radio" name="certPath" id="pathNotFound" value="notfound" data-save /> <strong>I searched and did not find a clearly required credential right now</strong></span>
+              <p>Use this only after you have actually checked and can explain what you found.</p>
+            </label>
           </div>
 
-          <div id="searchBarrierMessage" class="mini-note warning-note screen-only" style="display:none;">
-            You need to search CareerOneStop first and briefly record what you found before choosing a path below.
-          </div>
-
-          <div id="credentialFoundBlock" class="conditional">
-            <div class="job-card">
-              <h3>Credential Details</h3>
-              <div class="grid-2">
-                <div class="field">
-                  <label for="credentialName">Required or recommended credential</label>
-                  <input type="text" id="credentialName" data-save />
-                  <div class="mini-source">
-                    <div class="mini-source-title">Source</div>
-                    <input type="url" id="credentialNameSource" placeholder="Paste webpage link here" data-save />
-                  </div>
-                </div>
-
-                <div class="field">
-                  <label for="credentialProvider">Who offers, regulates, or recognizes it?</label>
-                  <input type="text" id="credentialProvider" data-save />
-                  <div class="mini-source">
-                    <div class="mini-source-title">Source</div>
-                    <input type="url" id="credentialProviderSource" placeholder="Paste webpage link here" data-save />
-                  </div>
-                </div>
+          <div class="conditional" id="credentialFoundBlock">
+            <div class="credential-card">
+              <div class="kicker">Credential details</div>
+              <h3>Research the required or recommended credential.</h3>
+              <div class="field-grid">
+                <div class="field"><label for="credentialName">Required or recommended credential</label><input type="text" id="credentialName" data-save /></div>
+                <div class="field"><label for="credentialProvider">Who offers, regulates, or recognizes it?</label><input type="text" id="credentialProvider" data-save /></div>
+                <div class="field"><label for="credentialProgram">Program or institution offering it</label><input type="text" id="credentialProgram" data-save /></div>
+                <div class="field"><label for="credentialCost">Estimated cost</label><input type="text" id="credentialCost" data-save /></div>
+                <div class="field"><label for="credentialFunding">Funding options or scholarships</label><input type="text" id="credentialFunding" data-save /></div>
+                <div class="field"><label for="credentialDeadline">Application deadline or fees</label><input type="text" id="credentialDeadline" data-save /></div>
+                <div class="field"><label for="credentialExam">Exam or assessment required?</label><input type="text" id="credentialExam" data-save /></div>
+                <div class="field"><label for="credentialExamCost">Cost of exam or assessment</label><input type="text" id="credentialExamCost" data-save /></div>
               </div>
-
-              <div class="grid-3">
-                <div class="field">
-                  <label for="credentialProgram">Program or institution offering it</label>
-                  <input type="text" id="credentialProgram" data-save />
-                  <div class="mini-source">
-                    <div class="mini-source-title">Source</div>
-                    <input type="url" id="credentialProgramSource" placeholder="Paste webpage link here" data-save />
-                  </div>
-                </div>
-
-                <div class="field">
-                  <label for="credentialCost">Estimated cost</label>
-                  <input type="text" id="credentialCost" data-save />
-                  <div class="mini-source">
-                    <div class="mini-source-title">Source</div>
-                    <input type="url" id="credentialCostSource" placeholder="Paste webpage link here" data-save />
-                  </div>
-                </div>
-
-                <div class="field">
-                  <label for="credentialFunding">Funding options or scholarships</label>
-                  <input type="text" id="credentialFunding" data-save />
-                  <div class="mini-source">
-                    <div class="mini-source-title">Source</div>
-                    <input type="url" id="credentialFundingSource" placeholder="Paste webpage link here" data-save />
-                  </div>
-                </div>
-              </div>
-
-              <div class="grid-3">
-                <div class="field">
-                  <label for="credentialExam">Exam or assessment required?</label>
-                  <input type="text" id="credentialExam" data-save />
-                  <div class="mini-source">
-                    <div class="mini-source-title">Source</div>
-                    <input type="url" id="credentialExamSource" placeholder="Paste webpage link here" data-save />
-                  </div>
-                </div>
-
-                <div class="field">
-                  <label for="credentialExamCost">Cost of exam or assessment</label>
-                  <input type="text" id="credentialExamCost" data-save />
-                  <div class="mini-source">
-                    <div class="mini-source-title">Source</div>
-                    <input type="url" id="credentialExamCostSource" placeholder="Paste webpage link here" data-save />
-                  </div>
-                </div>
-
-                <div class="field">
-                  <label for="credentialDeadline">Application deadline or fees</label>
-                  <input type="text" id="credentialDeadline" data-save />
-                  <div class="mini-source">
-                    <div class="mini-source-title">Source</div>
-                    <input type="url" id="credentialDeadlineSource" placeholder="Paste webpage link here" data-save />
-                  </div>
+              <div class="source-strip">
+                <div class="source-title">Credential sources</div>
+                <div class="field-grid">
+                  <div class="field"><label for="credentialSource1">Main credential source</label><input type="url" id="credentialSource1" placeholder="Paste webpage link here" data-save /></div>
+                  <div class="field"><label for="credentialSource2">Cost, funding, or exam source</label><input type="url" id="credentialSource2" placeholder="Paste webpage link here" data-save /></div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div id="credentialNotFoundBlock" class="conditional">
-            <div class="job-card">
-              <h3>No Clearly Required Credential Found Right Now</h3>
-              <div class="grid-2">
-                <div class="field">
-                  <label for="noCredentialExplain">What makes you think a credential is not clearly required right now?</label>
-                  <textarea id="noCredentialExplain" data-save></textarea>
-                </div>
-
-                <div class="field">
-                  <label for="noCredentialLater">Could this path require a credential later? If yes, when?</label>
-                  <textarea id="noCredentialLater" data-save></textarea>
-                </div>
-              </div>
-
-              <div class="grid-2">
-                <div class="field">
-                  <label for="noCredentialSource1">Source 1</label>
-                  <input type="url" id="noCredentialSource1" placeholder="Paste webpage link here" data-save />
-                </div>
-                <div class="field">
-                  <label for="noCredentialSource2">Source 2</label>
-                  <input type="url" id="noCredentialSource2" placeholder="Paste webpage link here" data-save />
-                </div>
+          <div class="conditional" id="credentialNotFoundBlock">
+            <div class="credential-card">
+              <div class="kicker">No clear credential found</div>
+              <h3>Explain what you checked.</h3>
+              <div class="field-grid">
+                <div class="field"><label for="noCredentialExplain">What makes you think a credential is not clearly required right now?</label><textarea id="noCredentialExplain" data-save></textarea></div>
+                <div class="field"><label for="noCredentialLater">Could this path require a credential later? If yes, when?</label><textarea id="noCredentialLater" data-save></textarea></div>
+                <div class="field"><label for="noCredentialSource1">Source 1</label><input type="url" id="noCredentialSource1" placeholder="Paste webpage link here" data-save /></div>
+                <div class="field"><label for="noCredentialSource2">Source 2</label><input type="url" id="noCredentialSource2" placeholder="Paste webpage link here" data-save /></div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div class="print-only print-card">
-          <h2>Section 4: Credential Check</h2>
-          <div class="print-grid">
-            <div class="print-item"><strong>CareerOneStop searched</strong><span id="print_certSearchChecked"></span></div>
-            <div class="print-item"><strong>Credential type checked</strong><span id="print_credentialType"></span></div>
-            <div class="print-item"><strong>Search term</strong><span id="print_certSearchTerm"></span></div>
-            <div class="print-item"><strong>What was found</strong><span id="print_certSearchFound"></span></div>
-            <div class="print-item print-full"><strong>Research result</strong><span id="print_certPath"></span></div>
-            <div class="print-item"><strong>Credential name</strong><span id="print_credentialName"></span></div>
-            <div class="print-item"><strong>Provider or regulator</strong><span id="print_credentialProvider"></span></div>
-            <div class="print-item"><strong>Program or institution</strong><span id="print_credentialProgram"></span></div>
-            <div class="print-item"><strong>Estimated cost</strong><span id="print_credentialCost"></span></div>
-            <div class="print-item"><strong>Funding options</strong><span id="print_credentialFunding"></span></div>
-            <div class="print-item"><strong>Exam or assessment</strong><span id="print_credentialExam"></span></div>
-            <div class="print-item"><strong>Exam cost</strong><span id="print_credentialExamCost"></span></div>
-            <div class="print-item print-full"><strong>Deadline or fees</strong><span id="print_credentialDeadline"></span></div>
-            <div class="print-item print-full"><strong>If no credential was found, explanation</strong><span id="print_noCredentialExplain"></span></div>
-            <div class="print-item print-full"><strong>If needed later, when?</strong><span id="print_noCredentialLater"></span></div>
-          </div>
-        </div>
-      </div>
-    </section>
+        <section class="section" id="section5">
+          <div class="kicker">Section 5</div>
+          <h2>Job market research</h2>
+          <p class="lede">Research two possible job examples connected to your path. In most cases, one job posting or one main source per job is enough.</p>
 
-    <section class="section">
-      <div class="card">
-        <div class="section-header">
-          <div class="section-number">Section 5</div>
-          <h2>Job Market Research</h2>
-          <p class="subtext">
-            Research two possible job examples connected to your path. In most cases, one job posting or one main source per job will be enough.
-          </p>
-        </div>
-
-        <div class="mini-note screen-only">
-          Try using one real posting or one main job source for each job card. Only use the extra source box if you needed a second page.
-        </div>
-
-        <div class="stack" style="margin-top:18px;">
           <div class="job-card">
-            <h3>Job Option 1</h3>
-
-            <div class="grid-2">
-              <div class="field">
-                <label for="job1MainSource">Main job posting or source</label>
-                <input type="url" id="job1MainSource" placeholder="Paste webpage link here" data-save />
-              </div>
-              <div class="field">
-                <label for="job1ExtraSource">Optional extra source</label>
-                <input type="url" id="job1ExtraSource" placeholder="Paste second webpage link here if needed" data-save />
-              </div>
-            </div>
-
-            <div class="grid-2" style="margin-top:16px;">
-              <div class="field">
-                <label for="job1Title">Job title</label>
-                <input type="text" id="job1Title" data-save />
-              </div>
-              <div class="field">
-                <label for="job1Salary">Typical salary with location</label>
-                <input type="text" id="job1Salary" data-save />
-              </div>
-            </div>
-
-            <div class="grid-3">
-              <div class="field">
-                <label for="job1Education">Required education</label>
-                <input type="text" id="job1Education" data-save />
-              </div>
-
-              <div class="field">
-                <label for="job1Skills">Key skills</label>
-                <input type="text" id="job1Skills" data-save />
-              </div>
-
-              <div class="field">
-                <label for="job1Availability">Job availability or outlook</label>
-                <input type="text" id="job1Availability" data-save />
-              </div>
-            </div>
-
-            <div class="grid-2">
-              <div class="field">
-                <label for="job1Employers">Common hiring companies, employers, agencies, unions, or branches</label>
-                <textarea id="job1Employers" data-save></textarea>
-              </div>
-
-              <div class="field">
-                <label for="job1Materials">Application materials needed</label>
-                <textarea id="job1Materials" placeholder="For example: cover letter, resume, CV, personal statement, letters of recommendation" data-save></textarea>
-              </div>
+            <div class="kicker">Job option 1</div>
+            <h3>First job example</h3>
+            <div class="field-grid">
+              <div class="field"><label for="job1MainSource">Main job posting or source</label><input type="url" id="job1MainSource" placeholder="Paste webpage link here" data-save /></div>
+              <div class="field"><label for="job1ExtraSource">Optional extra source</label><input type="url" id="job1ExtraSource" placeholder="Paste second webpage link here if needed" data-save /></div>
+              <div class="field"><label for="job1Title">Job title</label><input type="text" id="job1Title" data-save /></div>
+              <div class="field"><label for="job1Salary">Typical salary with location</label><input type="text" id="job1Salary" data-save /></div>
+              <div class="field"><label for="job1Education">Required education</label><input type="text" id="job1Education" data-save /></div>
+              <div class="field"><label for="job1Skills">Key skills</label><input type="text" id="job1Skills" data-save /></div>
+              <div class="field"><label for="job1Availability">Job availability or outlook</label><input type="text" id="job1Availability" data-save /></div>
+              <div class="field"><label for="job1Materials">Application materials needed</label><textarea id="job1Materials" data-save></textarea></div>
+              <div class="field" style="grid-column:1/-1;"><label for="job1Employers">Common hiring companies, employers, agencies, unions, or branches</label><textarea id="job1Employers" data-save></textarea></div>
             </div>
           </div>
 
           <div class="job-card">
-            <h3>Job Option 2</h3>
-
-            <div class="grid-2">
-              <div class="field">
-                <label for="job2MainSource">Main job posting or source</label>
-                <input type="url" id="job2MainSource" placeholder="Paste webpage link here" data-save />
-              </div>
-              <div class="field">
-                <label for="job2ExtraSource">Optional extra source</label>
-                <input type="url" id="job2ExtraSource" placeholder="Paste second webpage link here if needed" data-save />
-              </div>
-            </div>
-
-            <div class="grid-2" style="margin-top:16px;">
-              <div class="field">
-                <label for="job2Title">Job title</label>
-                <input type="text" id="job2Title" data-save />
-              </div>
-              <div class="field">
-                <label for="job2Salary">Typical salary with location</label>
-                <input type="text" id="job2Salary" data-save />
-              </div>
-            </div>
-
-            <div class="grid-3">
-              <div class="field">
-                <label for="job2Education">Required education</label>
-                <input type="text" id="job2Education" data-save />
-              </div>
-
-              <div class="field">
-                <label for="job2Skills">Key skills</label>
-                <input type="text" id="job2Skills" data-save />
-              </div>
-
-              <div class="field">
-                <label for="job2Availability">Job availability or outlook</label>
-                <input type="text" id="job2Availability" data-save />
-              </div>
-            </div>
-
-            <div class="grid-2">
-              <div class="field">
-                <label for="job2Employers">Common hiring companies, employers, agencies, unions, or branches</label>
-                <textarea id="job2Employers" data-save></textarea>
-              </div>
-
-              <div class="field">
-                <label for="job2Materials">Application materials needed</label>
-                <textarea id="job2Materials" placeholder="For example: cover letter, resume, CV, personal statement, letters of recommendation" data-save></textarea>
-              </div>
+            <div class="kicker">Job option 2</div>
+            <h3>Second job example</h3>
+            <div class="field-grid">
+              <div class="field"><label for="job2MainSource">Main job posting or source</label><input type="url" id="job2MainSource" placeholder="Paste webpage link here" data-save /></div>
+              <div class="field"><label for="job2ExtraSource">Optional extra source</label><input type="url" id="job2ExtraSource" placeholder="Paste second webpage link here if needed" data-save /></div>
+              <div class="field"><label for="job2Title">Job title</label><input type="text" id="job2Title" data-save /></div>
+              <div class="field"><label for="job2Salary">Typical salary with location</label><input type="text" id="job2Salary" data-save /></div>
+              <div class="field"><label for="job2Education">Required education</label><input type="text" id="job2Education" data-save /></div>
+              <div class="field"><label for="job2Skills">Key skills</label><input type="text" id="job2Skills" data-save /></div>
+              <div class="field"><label for="job2Availability">Job availability or outlook</label><input type="text" id="job2Availability" data-save /></div>
+              <div class="field"><label for="job2Materials">Application materials needed</label><textarea id="job2Materials" data-save></textarea></div>
+              <div class="field" style="grid-column:1/-1;"><label for="job2Employers">Common hiring companies, employers, agencies, unions, or branches</label><textarea id="job2Employers" data-save></textarea></div>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div class="print-only print-card">
-          <h2>Section 5: Job Market Research</h2>
-          <div class="print-grid">
-            <div class="print-item print-full"><strong>Job Option 1 main source</strong><span id="print_job1MainSource"></span></div>
-            <div class="print-item print-full"><strong>Job Option 1 extra source</strong><span id="print_job1ExtraSource"></span></div>
-            <div class="print-item"><strong>Job Option 1 title</strong><span id="print_job1Title"></span></div>
-            <div class="print-item"><strong>Job Option 1 salary</strong><span id="print_job1Salary"></span></div>
-            <div class="print-item"><strong>Job Option 1 education</strong><span id="print_job1Education"></span></div>
-            <div class="print-item"><strong>Job Option 1 key skills</strong><span id="print_job1Skills"></span></div>
-            <div class="print-item"><strong>Job Option 1 availability</strong><span id="print_job1Availability"></span></div>
-            <div class="print-item print-full"><strong>Job Option 1 common employers</strong><span id="print_job1Employers"></span></div>
-            <div class="print-item print-full"><strong>Job Option 1 application materials</strong><span id="print_job1Materials"></span></div>
+        <section class="section" id="section6">
+          <div class="kicker">Section 6</div>
+          <h2>Application process and next steps</h2>
+          <p class="lede">Pull together what you learned and think ahead to what you would need to do next.</p>
 
-            <div class="print-item print-full"><strong>Job Option 2 main source</strong><span id="print_job2MainSource"></span></div>
-            <div class="print-item print-full"><strong>Job Option 2 extra source</strong><span id="print_job2ExtraSource"></span></div>
-            <div class="print-item"><strong>Job Option 2 title</strong><span id="print_job2Title"></span></div>
-            <div class="print-item"><strong>Job Option 2 salary</strong><span id="print_job2Salary"></span></div>
-            <div class="print-item"><strong>Job Option 2 education</strong><span id="print_job2Education"></span></div>
-            <div class="print-item"><strong>Job Option 2 key skills</strong><span id="print_job2Skills"></span></div>
-            <div class="print-item"><strong>Job Option 2 availability</strong><span id="print_job2Availability"></span></div>
-            <div class="print-item print-full"><strong>Job Option 2 common employers</strong><span id="print_job2Employers"></span></div>
-            <div class="print-item print-full"><strong>Job Option 2 application materials</strong><span id="print_job2Materials"></span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="card">
-        <div class="section-header">
-          <div class="section-number">Section 6</div>
-          <h2>Application Process and Next Steps</h2>
-          <p class="subtext">
-            Pull together what you learned and think ahead to what you would need to do next.
-          </p>
-        </div>
-
-        <div class="stack">
-          <div class="application-card">
-            <h3>Application Planning</h3>
-            <div class="grid-2">
-              <div class="field">
-                <label for="jobsWhere">Where can you find jobs in this field?</label>
-                <textarea id="jobsWhere" placeholder="Websites, school district hiring pages, company pages, networking, unions, branch sites, state portals, and so on" data-save></textarea>
-              </div>
-              <div class="field">
-                <label for="resumeReq">Typical resume or CV requirements</label>
-                <textarea id="resumeReq" data-save></textarea>
-              </div>
-            </div>
-
-            <div class="grid-2">
-              <div class="field">
-                <label for="interviewQs">Common interview questions or preparation tips</label>
-                <textarea id="interviewQs" data-save></textarea>
-              </div>
-              <div class="field">
-                <label for="appTimeline">Application deadlines or typical timelines</label>
-                <textarea id="appTimeline" data-save></textarea>
-              </div>
-            </div>
-
-            <div class="grid-2">
-              <div class="field">
-                <label for="jobsWhereSource">Source for job search info</label>
-                <input type="url" id="jobsWhereSource" placeholder="Paste webpage link here" data-save />
-              </div>
-              <div class="field">
-                <label for="resumeReqSource">Source for resume, CV, interview, or timeline info</label>
-                <input type="url" id="resumeReqSource" placeholder="Paste webpage link here" data-save />
-              </div>
+          <div class="credential-card">
+            <div class="kicker">Application planning</div>
+            <h3>Where would you look and what would you need?</h3>
+            <div class="field-grid">
+              <div class="field"><label for="jobsWhere">Where can you find jobs in this field?</label><textarea id="jobsWhere" data-save></textarea></div>
+              <div class="field"><label for="resumeReq">Typical resume or CV requirements</label><textarea id="resumeReq" data-save></textarea></div>
+              <div class="field"><label for="requiredSkills">What required skills or qualifications do job postings ask for?</label><textarea id="requiredSkills" data-save></textarea></div>
+              <div class="field"><label for="preferredSkills">What do postings list as preferred, recommended, or nice to have?</label><textarea id="preferredSkills" data-save></textarea></div>
+              <div class="field"><label for="appTimeline">Application deadlines or typical timelines</label><textarea id="appTimeline" data-save></textarea></div>
+              <div class="field"><label for="jobsWhereSource">Source for job search info</label><input type="url" id="jobsWhereSource" placeholder="Paste webpage link here" data-save /></div>
+              <div class="field"><label for="resumeReqSource">Source for resume, qualifications, or timeline info</label><input type="url" id="resumeReqSource" placeholder="Paste webpage link here" data-save /></div>
             </div>
           </div>
 
-          <div class="reflection-card">
-            <h3>Final Reflection</h3>
-            <div class="grid-3">
-              <div class="field">
-                <label for="excitesYou">What excites you most about this career path?</label>
-                <textarea id="excitesYou" data-save></textarea>
-              </div>
-
-              <div class="field">
-                <label for="challenges">What challenges might you face, and how will you prepare for them?</label>
-                <textarea id="challenges" data-save></textarea>
-              </div>
-
-              <div class="field">
-                <label for="nextSixMonths">What are the next steps you need to take in the next 6 months?</label>
-                <textarea id="nextSixMonths" data-save></textarea>
-              </div>
+          <div class="reflection-card" style="margin-top:22px;">
+            <div class="kicker">Final reflection</div>
+            <h3>What are you noticing about this path?</h3>
+            <div class="field-grid three">
+              <div class="field"><label for="excitesYou">What excites you most about this career path?</label><textarea id="excitesYou" data-save></textarea></div>
+              <div class="field"><label for="challenges">What challenges might you face, and how will you prepare for them?</label><textarea id="challenges" data-save></textarea></div>
+              
             </div>
           </div>
-        </div>
+        </section>
 
-        <div class="print-only print-card">
-          <h2>Section 6: Application Process and Next Steps</h2>
-          <div class="print-grid">
-            <div class="print-item print-full"><strong>Where to find jobs</strong><span id="print_jobsWhere"></span></div>
-            <div class="print-item print-full"><strong>Resume or CV requirements</strong><span id="print_resumeReq"></span></div>
-            <div class="print-item print-full"><strong>Interview questions or preparation tips</strong><span id="print_interviewQs"></span></div>
-            <div class="print-item print-full"><strong>Application deadlines or timelines</strong><span id="print_appTimeline"></span></div>
-            <div class="print-item print-full"><strong>What excites me most</strong><span id="print_excitesYou"></span></div>
-            <div class="print-item print-full"><strong>Challenges and preparation</strong><span id="print_challenges"></span></div>
-            <div class="print-item print-full"><strong>Next steps in the next 6 months</strong><span id="print_nextSixMonths"></span></div>
+        <section class="final-card" id="summarySection">
+          <div class="final-grid">
+            <div>
+              <div class="kicker">Final copy</div>
+              <h2>Your Week 2 notes.</h2>
+              <p class="lede">This clean version updates as you type. Review it, then print or save as a PDF when you are done.</p>
+            </div>
+            <div class="summary-output" id="summaryOutput">Start filling out the page. Your Week 2 notes will appear here.</div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
+      </main>
+    </div>
   </div>
 
   <script>
-    const STORAGE_KEY = "career_path_timeline_week2_sections_4_6";
-    const saveStatus = document.getElementById("saveStatus");
-    const clearBtn = document.getElementById("clearBtn");
+    const STORAGE_KEY = 'career_path_week2_microsite_preview_v1';
+    const THEME_KEY = 'career_path_week2_theme_preview_v1';
+    const saveStatus = document.getElementById('saveStatus');
+    const summaryOutput = document.getElementById('summaryOutput');
 
-    const fields = Array.from(document.querySelectorAll("[data-save]"));
-    const searchChecked = document.getElementById("certSearchChecked");
-    const searchTerm = document.getElementById("certSearchTerm");
-    const searchFound = document.getElementById("certSearchFound");
-    const foundRadio = document.getElementById("pathFound");
-    const notFoundRadio = document.getElementById("pathNotFound");
-    const foundBlock = document.getElementById("credentialFoundBlock");
-    const notFoundBlock = document.getElementById("credentialNotFoundBlock");
-    const barrierMessage = document.getElementById("searchBarrierMessage");
-
-    function getFormData() {
-      const data = {};
-      fields.forEach(field => {
-        if (field.type === "radio") {
-          if (field.checked) data[field.name] = field.value;
-        } else {
-          data[field.id] = field.value;
-        }
-      });
-      return data;
+    const savedTheme = localStorage.getItem(THEME_KEY);
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark');
+      document.getElementById('themeToggle').textContent = 'Light mode';
     }
 
-    function saveData() {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(getFormData()));
-        saveStatus.textContent = "Saved";
-        saveStatus.className = "saved-note";
-      } catch (e) {
-        saveStatus.textContent = "Not saved";
-        saveStatus.className = "warning-note";
+    function fields() {
+      return Array.from(document.querySelectorAll('[data-save]'));
+    }
+
+    function val(id) {
+      const el = document.getElementById(id);
+      if (!el) return '';
+      if (el.type === 'radio') {
+        const checked = document.querySelector(`input[name="${el.name}"]:checked`);
+        return checked ? checked.value : '';
       }
+      return el.value.trim();
     }
 
-    function loadData() {
+    function saveAll() {
+      const data = {};
+      fields().forEach(el => {
+        if (el.type === 'radio') data[el.name] = val(el.id);
+        else data[el.id] = el.value;
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      saveStatus.textContent = 'Saved in this browser.';
+    }
+
+    function loadAll() {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return;
       try {
         const data = JSON.parse(raw);
-        fields.forEach(field => {
-          if (field.type === "radio") {
-            field.checked = data[field.name] === field.value;
-          } else if (Object.prototype.hasOwnProperty.call(data, field.id)) {
-            field.value = data[field.id];
-          }
+        fields().forEach(el => {
+          if (el.type === 'radio') el.checked = data[el.name] === el.value;
+          else if (data[el.id] !== undefined) el.value = data[el.id];
         });
-      } catch (e) {
-        console.log("Could not load saved data.");
-      }
+      } catch(e) {}
     }
 
-    function hasSearchEvidence() {
-      return searchChecked.value === "yes" &&
-        searchTerm.value.trim() !== "" &&
-        searchFound.value.trim() !== "";
+    function updateCredentialBlocks() {
+      const checked = document.querySelector('input[name="certPath"]:checked');
+      const certSearchChecked = document.getElementById('certSearchChecked').value;
+      const found = checked && checked.value === 'found';
+      const notFound = checked && checked.value === 'notfound';
+      const barrier = document.getElementById('searchBarrier');
+      const canChoose = certSearchChecked === 'yes' && document.getElementById('certSearchFound').value.trim();
+
+      barrier.classList.toggle('show', Boolean(checked && !canChoose));
+      document.getElementById('credentialFoundBlock').classList.toggle('show', found && canChoose);
+      document.getElementById('credentialNotFoundBlock').classList.toggle('show', notFound && canChoose);
     }
 
-    function updateCredentialVisibility() {
-      const ready = hasSearchEvidence();
-
-      if (!ready && (foundRadio.checked || notFoundRadio.checked)) {
-        foundRadio.checked = false;
-        notFoundRadio.checked = false;
-        saveData();
-      }
-
-      barrierMessage.style.display = (!ready && (searchChecked.value || searchTerm.value.trim() || searchFound.value.trim())) ? "block" : "none";
-
-      if (ready && foundRadio.checked) {
-        foundBlock.classList.add("show");
-      } else {
-        foundBlock.classList.remove("show");
-      }
-
-      if (ready && notFoundRadio.checked) {
-        notFoundBlock.classList.add("show");
-      } else {
-        notFoundBlock.classList.remove("show");
-      }
-    }
-
-    function syncPrintValue(id, value) {
-      const target = document.getElementById("print_" + id);
-      if (target) {
-        target.textContent = value && value.trim() ? value.trim() : "—";
-      }
-    }
-
-    function syncPrintRadio(name, valueMap = {}) {
-      const target = document.getElementById("print_" + name);
-      if (!target) return;
-      const checked = document.querySelector(`input[name="${name}"]:checked`);
-      const raw = checked ? checked.value : "";
-      target.textContent = raw ? (valueMap[raw] || raw) : "—";
-    }
-
-    function fillPrintView() {
-      const textIds = [
-        "certSearchChecked","credentialType","certSearchTerm","certSearchFound",
-        "credentialName","credentialProvider","credentialProgram","credentialCost",
-        "credentialFunding","credentialExam","credentialExamCost","credentialDeadline",
-        "noCredentialExplain","noCredentialLater",
-        "job1MainSource","job1ExtraSource","job1Title","job1Salary","job1Education","job1Skills","job1Availability",
-        "job1Employers","job1Materials",
-        "job2MainSource","job2ExtraSource","job2Title","job2Salary","job2Education","job2Skills","job2Availability",
-        "job2Employers","job2Materials",
-        "jobsWhere","resumeReq","interviewQs","appTimeline",
-        "excitesYou","challenges","nextSixMonths"
-      ];
-
-      textIds.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) syncPrintValue(id, el.value);
+    function updateSummary() {
+      const certPath = val('pathFound') === 'found' ? 'Found a required or recommended credential' : val('pathFound') === 'notfound' ? 'No clearly required credential found right now' : '';
+      const lines = [];
+      lines.push('Week 2 Career Path Research Notes');
+      lines.push('');
+      lines.push('Section 4: Credential Check');
+      lines.push(`CareerOneStop searched: ${val('certSearchChecked')}`);
+      lines.push(`Credential type checked: ${val('credentialType')}`);
+      lines.push(`Search term: ${val('certSearchTerm')}`);
+      lines.push(`What I found: ${val('certSearchFound')}`);
+      lines.push(`Research result: ${certPath}`);
+      lines.push(`Credential name: ${val('credentialName')}`);
+      lines.push(`Provider or regulator: ${val('credentialProvider')}`);
+      lines.push(`Program or institution: ${val('credentialProgram')}`);
+      lines.push(`Estimated cost: ${val('credentialCost')}`);
+      lines.push(`Funding options or scholarships: ${val('credentialFunding')}`);
+      lines.push(`Application deadline or fees: ${val('credentialDeadline')}`);
+      lines.push(`Exam or assessment: ${val('credentialExam')}`);
+      lines.push(`Exam cost: ${val('credentialExamCost')}`);
+      lines.push(`Credential source 1: ${val('credentialSource1')}`);
+      lines.push(`Credential source 2: ${val('credentialSource2')}`);
+      lines.push(`No credential explanation: ${val('noCredentialExplain')}`);
+      lines.push(`Could a credential be needed later?: ${val('noCredentialLater')}`);
+      lines.push(`No credential source 1: ${val('noCredentialSource1')}`);
+      lines.push(`No credential source 2: ${val('noCredentialSource2')}`);
+      lines.push('');
+      lines.push('Section 5: Job Market Research');
+      [1, 2].forEach(n => {
+        lines.push(`Job Option ${n}`);
+        lines.push(`Main source: ${val(`job${n}MainSource`)}`);
+        lines.push(`Extra source: ${val(`job${n}ExtraSource`)}`);
+        lines.push(`Job title: ${val(`job${n}Title`)}`);
+        lines.push(`Salary with location: ${val(`job${n}Salary`)}`);
+        lines.push(`Required education: ${val(`job${n}Education`)}`);
+        lines.push(`Key skills: ${val(`job${n}Skills`)}`);
+        lines.push(`Availability or outlook: ${val(`job${n}Availability`)}`);
+        lines.push(`Application materials: ${val(`job${n}Materials`)}`);
+        lines.push(`Common employers: ${val(`job${n}Employers`)}`);
+        lines.push('');
       });
-
-      syncPrintRadio("certPath", {
-        found: "A required or recommended credential was found",
-        notfound: "No clearly required credential was found right now"
-      });
-
-      const prettySelects = {
-        certSearchChecked: {
-          yes: "Yes, I searched it",
-          notyet: "Not yet"
-        },
-        credentialType: {
-          certification: "Certification",
-          license: "License",
-          apprenticeship: "Apprenticeship or journey-level requirement",
-          military: "Military qualification or training requirement",
-          unsure: "I am not sure yet"
-        }
-      };
-
-      Object.keys(prettySelects).forEach(id => {
-        const el = document.getElementById(id);
-        const target = document.getElementById("print_" + id);
-        if (el && target) {
-          target.textContent = el.value ? prettySelects[id][el.value] || el.value : "—";
-        }
-      });
+      lines.push('Section 6: Application Process and Next Steps');
+      lines.push(`Where to find jobs: ${val('jobsWhere')}`);
+      lines.push(`Resume or CV requirements: ${val('resumeReq')}`);
+      lines.push(`Required skills or qualifications from postings: ${val('requiredSkills')}`);
+      lines.push(`Preferred, recommended, or nice-to-have qualifications: ${val('preferredSkills')}`);
+      lines.push(`Application deadlines or timelines: ${val('appTimeline')}`);
+      lines.push(`Job search source: ${val('jobsWhereSource')}`);
+      lines.push(`Resume/qualifications/timeline source: ${val('resumeReqSource')}`);
+      lines.push(`What excites me most: ${val('excitesYou')}`);
+      lines.push(`Challenges and preparation: ${val('challenges')}`);
+      summaryOutput.textContent = lines.join('\n');
     }
 
-    fields.forEach(field => {
-      const eventType = field.tagName === "SELECT" || field.type === "radio" ? "change" : "input";
-      field.addEventListener(eventType, () => {
-        saveStatus.textContent = "Saving...";
-        saveStatus.className = "";
-        saveData();
-        updateCredentialVisibility();
-      });
+    function handleChange() {
+      updateCredentialBlocks();
+      updateSummary();
+      saveAll();
+    }
+
+    fields().forEach(el => {
+      el.addEventListener('input', handleChange);
+      el.addEventListener('change', handleChange);
     });
 
-    if (foundRadio) {
-      foundRadio.addEventListener("click", () => {
-        if (!hasSearchEvidence()) {
-          foundRadio.checked = false;
-          barrierMessage.style.display = "block";
-        }
-        updateCredentialVisibility();
-      });
-    }
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      const isDark = document.body.classList.contains('dark');
+      localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light');
+      document.getElementById('themeToggle').textContent = isDark ? 'Light mode' : 'Dark mode';
+    });
 
-    if (notFoundRadio) {
-      notFoundRadio.addEventListener("click", () => {
-        if (!hasSearchEvidence()) {
-          notFoundRadio.checked = false;
-          barrierMessage.style.display = "block";
-        }
-        updateCredentialVisibility();
-      });
-    }
+    document.getElementById('printBtn').addEventListener('click', () => {
+      updateSummary();
+      window.print();
+    });
 
-    clearBtn.addEventListener("click", () => {
-      const ok = window.confirm("Clear everything on this Week 2 page?");
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      const ok = confirm('Clear this page on this device? This cannot be undone.');
       if (!ok) return;
-
       localStorage.removeItem(STORAGE_KEY);
-
-      fields.forEach(field => {
-        if (field.type === "radio") {
-          field.checked = false;
-        } else {
-          field.value = "";
-        }
+      fields().forEach(el => {
+        if (el.type === 'radio') el.checked = false;
+        else el.value = '';
       });
-
-      updateCredentialVisibility();
-      saveStatus.textContent = "Cleared";
-      saveStatus.className = "warning-note";
+      updateCredentialBlocks();
+      updateSummary();
+      saveStatus.textContent = 'Page cleared.';
     });
 
-    window.addEventListener("beforeprint", fillPrintView);
-
-    loadData();
-    updateCredentialVisibility();
-    saveStatus.textContent = "Saved";
-    saveStatus.className = "saved-note";
+    loadAll();
+    updateCredentialBlocks();
+    updateSummary();
   </script>
 </body>
 </html>
