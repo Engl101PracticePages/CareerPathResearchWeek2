@@ -454,20 +454,131 @@
       * { scroll-behavior: auto !important; transition: none !important; }
     }
 
+    .print-submission { display: none; }
+
     @media print {
-      body, body.dark { background: white !important; color: black !important; font-size: 12pt; }
-      .screen-only, .tool-strip, .side-nav, .hero, .barrier { display: none !important; }
-      .page { max-width: none; padding: 0; }
-      .workspace { display: block; }
-      .section, .final-card, .credential-card, .job-card, .reflection-card, .mini-card, .summary-output {
+      @page {
+        margin: 0.55in;
+      }
+
+      * {
         box-shadow: none !important;
-        background: white !important;
-        border: 1px solid #bbb !important;
-        color: black !important;
+        text-shadow: none !important;
+      }
+
+      html,
+      body,
+      body.dark {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-family: Arial, Helvetica, sans-serif !important;
+        font-size: 11pt !important;
+        line-height: 1.35 !important;
+      }
+
+      .page {
+        display: none !important;
+      }
+
+      .print-submission {
+        display: block !important;
+        color: #000000 !important;
+        background: #ffffff !important;
+      }
+
+      .print-header {
+        border-bottom: 2px solid #000000;
+        padding-bottom: 10px;
+        margin-bottom: 14px;
+      }
+
+      .print-header h1 {
+        font-family: Georgia, 'Times New Roman', serif !important;
+        font-size: 22pt !important;
+        line-height: 1.05 !important;
+        letter-spacing: 0 !important;
+        margin: 0 0 6px !important;
+        max-width: none !important;
+      }
+
+      .print-meta {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px 18px;
+        margin-top: 10px;
+        font-size: 10.5pt;
+      }
+
+      .print-blank {
+        border-bottom: 1px solid #000000;
+        min-height: 18px;
+        display: inline-block;
+        min-width: 180px;
+      }
+
+      .print-section {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        margin: 0 0 14px;
+        padding: 0 0 10px;
+        border-bottom: 1px solid #bdbdbd;
+      }
+
+      .print-section h2 {
+        font-family: Georgia, 'Times New Roman', serif !important;
+        font-size: 15pt !important;
+        line-height: 1.15 !important;
+        letter-spacing: 0 !important;
+        margin: 0 0 8px !important;
+      }
+
+      .print-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px 12px;
+      }
+
+      .print-grid.three {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+
+      .print-item {
+        border: 1px solid #c9c9c9;
+        padding: 7px 8px;
+        min-height: 34px;
+        break-inside: avoid;
         page-break-inside: avoid;
       }
-      .section { margin-bottom: 12px; }
-      .print-only { display: block !important; }
+
+      .print-item.full {
+        grid-column: 1 / -1;
+      }
+
+      .print-label {
+        display: block;
+        font-size: 8.8pt;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: #333333 !important;
+        margin-bottom: 3px;
+      }
+
+      .print-answer {
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      .print-missing {
+        color: #777777 !important;
+        font-style: italic;
+      }
+
+      .print-note {
+        margin: 6px 0 0;
+        font-size: 9.5pt;
+        color: #333333 !important;
+      }
     }
   </style>
 </head>
@@ -709,6 +820,20 @@
     </div>
   </div>
 
+  <section class="print-submission" id="printSubmission" aria-label="Printable Week 2 submission">
+    <div class="print-header">
+      <h1>Week 2 Career Path Research Notes</h1>
+      <div class="print-meta">
+        <div>Student name: <span class="print-blank"></span></div>
+        <div>Date: <span class="print-blank"></span></div>
+        <div>Course: ENG 101</div>
+        <div>Assignment: Career Path Research, Week 2</div>
+      </div>
+      <p class="print-note">This print version includes only the student’s worksheet answers and sources for grading.</p>
+    </div>
+    <div id="printSubmissionContent"></div>
+  </section>
+
   <script>
     const STORAGE_KEY = 'career_path_week2_microsite_preview_v1';
     const THEME_KEY = 'career_path_week2_theme_preview_v1';
@@ -833,9 +958,149 @@
       summaryOutput.textContent = lines.join('\n');
     }
 
+    function escapeHtml(value) {
+      return String(value || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function answerHtml(value) {
+      const clean = String(value || '').trim();
+      if (!clean) return '<span class="print-missing">Not entered</span>';
+      return escapeHtml(clean);
+    }
+
+    function printItem(label, value, full = false) {
+      return `
+        <div class="print-item${full ? ' full' : ''}">
+          <span class="print-label">${escapeHtml(label)}</span>
+          <div class="print-answer">${answerHtml(value)}</div>
+        </div>
+      `;
+    }
+
+    function printSection(title, itemsHtml) {
+      return `
+        <section class="print-section">
+          <h2>${escapeHtml(title)}</h2>
+          ${itemsHtml}
+        </section>
+      `;
+    }
+
+    function credentialResultText() {
+      const result = val('pathFound');
+      if (result === 'found') return 'Found a required or recommended credential to research';
+      if (result === 'notfound') return 'Searched and did not find a clearly required credential right now';
+      return '';
+    }
+
+    function updatePrintSubmission() {
+      const target = document.getElementById('printSubmissionContent');
+      if (!target) return;
+
+      const credentialResult = val('pathFound');
+      const credentialDetails = credentialResult === 'found'
+        ? `
+          <div class="print-grid">
+            ${printItem('Required or recommended credential', val('credentialName'))}
+            ${printItem('Who offers, regulates, or recognizes it?', val('credentialProvider'))}
+            ${printItem('Program or institution offering it', val('credentialProgram'))}
+            ${printItem('Estimated cost', val('credentialCost'))}
+            ${printItem('Funding options or scholarships', val('credentialFunding'))}
+            ${printItem('Application deadline or fees', val('credentialDeadline'))}
+            ${printItem('Exam or assessment required?', val('credentialExam'))}
+            ${printItem('Cost of exam or assessment', val('credentialExamCost'))}
+            ${printItem('Main credential source', val('credentialSource1'), true)}
+            ${printItem('Cost, funding, or exam source', val('credentialSource2'), true)}
+          </div>
+        `
+        : credentialResult === 'notfound'
+          ? `
+            <div class="print-grid">
+              ${printItem('What makes you think a credential is not clearly required right now?', val('noCredentialExplain'), true)}
+              ${printItem('Could this path require a credential later? If yes, when?', val('noCredentialLater'), true)}
+              ${printItem('Source 1', val('noCredentialSource1'), true)}
+              ${printItem('Source 2', val('noCredentialSource2'), true)}
+            </div>
+          `
+          : `
+            <div class="print-grid">
+              ${printItem('Credential path selected', '')}
+            </div>
+          `;
+
+      const jobOption = n => `
+        <div class="print-grid">
+          ${printItem('Main job posting or source', val(`job${n}MainSource`), true)}
+          ${printItem('Optional extra source', val(`job${n}ExtraSource`), true)}
+          ${printItem('Job title', val(`job${n}Title`))}
+          ${printItem('Typical salary with location', val(`job${n}Salary`))}
+          ${printItem('Required education', val(`job${n}Education`))}
+          ${printItem('Key skills', val(`job${n}Skills`))}
+          ${printItem('Job availability or outlook', val(`job${n}Availability`))}
+          ${printItem('Application materials needed', val(`job${n}Materials`), true)}
+          ${printItem('Common hiring companies, employers, agencies, unions, or branches', val(`job${n}Employers`), true)}
+        </div>
+      `;
+
+      target.innerHTML = `
+        ${printSection('Section 4: Credential Check', `
+          <div class="print-grid">
+            ${printItem('CareerOneStop Certification Finder searched?', val('certSearchChecked'))}
+            ${printItem('Kind of credential checked', val('credentialType'))}
+            ${printItem('Career, job title, or keyword searched', val('certSearchTerm'))}
+            ${printItem('What the search found', val('certSearchFound'))}
+            ${printItem('Research result', credentialResultText(), true)}
+          </div>
+        `)}
+
+        ${printSection('Credential Details', credentialDetails)}
+
+        ${printSection('Section 5: BLS Snapshot', `
+          <div class="print-grid">
+            ${printItem('BLS occupation title', val('blsTitle'))}
+            ${printItem('BLS page link', val('blsSource'))}
+            ${printItem('Median pay', val('blsPay'))}
+            ${printItem('Job outlook', val('blsOutlook'))}
+            ${printItem('Typical entry-level education', val('blsEducation'))}
+            ${printItem('Work experience or on-the-job training listed by BLS', val('blsTraining'))}
+            ${printItem('One thing from BLS that matches the job postings', val('blsMatch'), true)}
+            ${printItem('One thing from BLS that seems different from the job postings', val('blsDifferent'), true)}
+          </div>
+        `)}
+
+        ${printSection('Job Option 1', jobOption(1))}
+        ${printSection('Job Option 2', jobOption(2))}
+
+        ${printSection('Section 6: Application Process and Next Steps', `
+          <div class="print-grid">
+            ${printItem('Where can you find jobs in this field?', val('jobsWhere'), true)}
+            ${printItem('Typical resume or CV requirements', val('resumeReq'), true)}
+            ${printItem('Required skills or qualifications job postings ask for', val('requiredSkills'), true)}
+            ${printItem('Preferred, recommended, or nice-to-have qualifications', val('preferredSkills'), true)}
+            ${printItem('Application deadlines or typical timelines', val('appTimeline'), true)}
+            ${printItem('Source for job search info', val('jobsWhereSource'), true)}
+            ${printItem('Source for resume, qualifications, or timeline info', val('resumeReqSource'), true)}
+          </div>
+        `)}
+
+        ${printSection('Final Reflection', `
+          <div class="print-grid">
+            ${printItem('What excites you most about this career path?', val('excitesYou'), true)}
+            ${printItem('What challenges might you face, and how will you prepare for them?', val('challenges'), true)}
+          </div>
+        `)}
+      `;
+    }
+
     function handleChange() {
       updateCredentialBlocks();
       updateSummary();
+      updatePrintSubmission();
       saveAll();
     }
 
@@ -853,6 +1118,7 @@
 
     document.getElementById('printBtn').addEventListener('click', () => {
       updateSummary();
+      updatePrintSubmission();
       window.print();
     });
 
@@ -866,12 +1132,20 @@
       });
       updateCredentialBlocks();
       updateSummary();
+      updatePrintSubmission();
       saveStatus.textContent = 'Page cleared.';
+    });
+
+    window.addEventListener('beforeprint', () => {
+      updateCredentialBlocks();
+      updateSummary();
+      updatePrintSubmission();
     });
 
     loadAll();
     updateCredentialBlocks();
     updateSummary();
+    updatePrintSubmission();
   </script>
 </body>
 </html>
